@@ -1,15 +1,22 @@
 import urllib.request as ur
 import re
 
-urls=['http://google.com', 'http://youtube.com']
+while True:
 
-regex = '<title>(.+?)</title>'
+    sym=input("Enter the symbol: ")
 
-patterns = re.compile(regex)
+    regex='<span id="yfs_l84_{}">(.+?)</span>'.format(sym)
 
-for i in range(len(urls)):
-    htmlfile=ur.urlopen(urls[i])
+    pattern=re.compile(regex)
+
+    url='https://in.finance.yahoo.com/q?s={}'.format(sym)
+
+    htmlfile=ur.urlopen(url)
+
     source=htmlfile.read()
-    source = str(source)    #because we've got string pattern to match with source
-    title=re.findall(patterns, source)
-    print(title)
+
+    source=str(source)
+
+    price=re.findall(pattern, source)
+
+    print(price[0])
