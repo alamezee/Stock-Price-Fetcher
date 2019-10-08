@@ -11,12 +11,6 @@ while True:
 
     url='https://in.finance.yahoo.com/q?s={}'.format(sym)
 
-    htmlfile=ur.urlopen(url)
+    price=re.findall(pattern, str(ur.urlopen(url).read()))[0]
 
-    source=htmlfile.read()
-
-    source=str(source)
-
-    price=re.findall(pattern, source)
-
-    print(price[0])
+    print(price)
